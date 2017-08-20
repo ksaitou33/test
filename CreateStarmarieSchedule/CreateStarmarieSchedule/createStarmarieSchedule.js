@@ -5,7 +5,7 @@ var dynamo = new AWS.DynamoDB.DocumentClient();
 var TABLENAME = "oauth_tokens";
 var KEYNAME = "google";
 
-refreshToken = function (parameters, success, fail) {
+getSchedule = function (parameters) {
     var options = {
         hostname: "accounts.google.com",
         port: 443,
@@ -61,18 +61,7 @@ exports.handler = function (event, context) {
             }
 
             var parameters = data.Items[0];
-            var update = function (newToken) {
-                parameters.token = newToken;
-                parameters.timestamp = (new Date()).toString();
-                dynamo.put({ TableName: TABLENAME, Item: parameters }, function (err, data) {
-                    if (err) {
-                        console.error(err);
-                        context.fail({ result: "error", message: "failed to update dynamodb", details: err });
-                    }
-                    else { context.succeed(JSON.stringify({ result: "ok" })); }
-                });
-            };
-            refreshToken(parameters, update, context.fail);
+            getSchedule(parameters);
         }
     );
 };
