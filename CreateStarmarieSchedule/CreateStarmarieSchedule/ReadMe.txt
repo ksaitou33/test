@@ -1,1 +1,1 @@
-﻿To be completed - getting started text for the new project.
+﻿Googleカレンダーからアイテムを取得してDynamoDBに格納するLambda関数
