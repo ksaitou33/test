@@ -1,1 +1,3 @@
-﻿To be completed - getting started text for the new project.
+﻿oauth認証のアクセストークンを更新する関数
+
+LambdaからCloudWatch Eventsで30分ごとに実行される
