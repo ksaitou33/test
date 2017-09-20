@@ -26,18 +26,34 @@ namespace Mailform.Controllers
         {
             //Test();
 
+            var mail = new Mail();
+
             return View(mail);
         }
 
         public void Test()
         {
-            string from = @"k_saitou33@hotmail.com";
-            string to = @"keigo@mdr.to";
-            string subject = @"test";
-            string body = "test¥ntest";
+            var from = @"k_saitou33@hotmail.com";
+            var to = @"keigo@mdr.to";
+            var subject = @"test";
+            var body = "test¥ntest";
 
-            var mail = new Mail(from, to, subject, body);
-            mail.Send();
+            try
+            {
+				var mail = new Mail()
+				{
+					From = from,
+					To = to,
+					Subject = subject,
+					Body = body
+				};
+				mail.Send();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
         }
     }
 }

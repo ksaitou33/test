@@ -24,16 +24,16 @@ namespace Mailform.Models
 			this.port = DefaultPort;
         }
 
-        public Mail(string from, string to, string subject, string body) : this()
+        public void Send()
         {
-            if(String.IsNullOrEmpty(from))
-            {
-                throw new Exception();
-            }
-            if(String.IsNullOrEmpty(to))
-            {
-                throw new Exception();
-            }
+			if (String.IsNullOrEmpty(from))
+			{
+				throw new Exception();
+			}
+			if (String.IsNullOrEmpty(to))
+			{
+				throw new Exception();
+			}
 			if (String.IsNullOrEmpty(subject))
 			{
 				throw new Exception();
@@ -43,14 +43,6 @@ namespace Mailform.Models
 				throw new Exception();
 			}
 
-            this.from = from;
-            this.to = to;
-            this.subject = subject;
-            this.body = body;
-        }
-
-        public void Send()
-        {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(from));
             message.To.Add(new MailboxAddress(to));
@@ -67,6 +59,70 @@ namespace Mailform.Models
                 client.Disconnect(true);
             }
         }
+
+        public string From
+        {
+            get
+            {
+                return from;
+            }
+            set
+            {
+				if (String.IsNullOrEmpty(value))
+				{
+					throw new Exception();
+				}
+                this.from = value;
+            }
+        }
+
+		public string To
+		{
+			get
+			{
+				return to;
+			}
+			set
+			{
+				if (String.IsNullOrEmpty(value))
+				{
+					throw new Exception();
+				}
+				this.to = value;
+			}
+		}
+
+		public string Subject
+		{
+			get
+			{
+				return subject;
+			}
+			set
+			{
+				if (String.IsNullOrEmpty(value))
+				{
+					throw new Exception();
+				}
+				this.subject = value;
+			}
+		}
+
+		public string Body
+		{
+			get
+			{
+				return body;
+			}
+			set
+			{
+				if (String.IsNullOrEmpty(value))
+				{
+					throw new Exception();
+				}
+				this.body = value;
+			}
+		}
 
         public string Server
         {
