@@ -1,0 +1,33 @@
+﻿@model Mailform.Models.UserEdit
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>メールフォームテスト - 確認コード入力</title>
+</head>
+<body>
+    <div>
+        <div>
+			先ほど入力されたメールアドレスに確認コードを送信しました。<br />
+	        下の入力欄に確認コードを入力してください。
+		</div>
+		@using(Html.BeginForm()){
+            @Html.TextBoxFor(
+                model => model.AuthenticationCode,
+                new { size = 6 }
+            )
+            <input type="submit" value="送信" />
+
+            if(ViewBag.Exception is System.Exception && !String.IsNullOrEmpty(ViewBag.Exception.Message))
+            {
+                <div>@ViewBag.Exception.Message</div>
+            }
+        }
+    </div>
+</body>
+</html>

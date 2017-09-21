@@ -17,5 +17,6 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.VersionControlPolicy = $1
+		$0.StandardHeader = $2
 	EndGlobalSection
 EndGlobal

@@ -75,6 +75,8 @@
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Views\AuthCode\" />
+    <Folder Include="Views\WriteMail\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -83,6 +85,11 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Models\Mail.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Controllers\AuthCodeController.cs" />
+    <Compile Include="Controllers\WriteMailController.cs" />
+    <Compile Include="Models\UserEdit.cs" />
+    <Compile Include="Models\MailEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -93,7 +100,8 @@
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
-    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\AuthCode\Index.cshtml" />
+    <Content Include="Views\WriteMail\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

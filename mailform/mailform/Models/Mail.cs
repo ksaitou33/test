@@ -28,35 +28,42 @@ namespace Mailform.Models
         {
 			if (String.IsNullOrEmpty(from))
 			{
-				throw new Exception();
+				throw new Exception("送信元のメールアドレスが空です");
 			}
 			if (String.IsNullOrEmpty(to))
 			{
-				throw new Exception();
+				throw new Exception("送信先のメールアドレスが空です");
 			}
 			if (String.IsNullOrEmpty(subject))
 			{
-				throw new Exception();
+				throw new Exception("メールの件名あ空です");
 			}
 			if (String.IsNullOrEmpty(body))
 			{
-				throw new Exception();
+				throw new Exception("メールの本文が空です");
 			}
 
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(from));
-            message.To.Add(new MailboxAddress(to));
-            message.Subject = subject;
-            message.Body = new TextPart("plain")
+            try
             {
-                Text = body
-            };
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(from));
+                message.To.Add(new MailboxAddress(to));
+                message.Subject = subject;
+                message.Body = new TextPart("plain")
+                {
+                    Text = body
+                };
 
-            using(var client = new SmtpClient())
+                using (var client = new SmtpClient())
+                {
+                    client.Connect(server, port, false);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+            }
+            catch(Exception e)
             {
-                client.Connect(server, port, false);
-                client.Send(message);
-                client.Disconnect(true);
+                throw new Exception("メール送信に失敗しました" + e.Message);
             }
         }
 
@@ -70,7 +77,7 @@ namespace Mailform.Models
             {
 				if (String.IsNullOrEmpty(value))
 				{
-					throw new Exception();
+					throw new Exception("送信元のメールアドレスが空です");
 				}
                 this.from = value;
             }
@@ -86,7 +93,7 @@ namespace Mailform.Models
 			{
 				if (String.IsNullOrEmpty(value))
 				{
-					throw new Exception();
+					throw new Exception("送信先のメールアドレスが空です");
 				}
 				this.to = value;
 			}
@@ -102,7 +109,7 @@ namespace Mailform.Models
 			{
 				if (String.IsNullOrEmpty(value))
 				{
-					throw new Exception();
+					throw new Exception("メールの件名が空です");
 				}
 				this.subject = value;
 			}
@@ -118,7 +125,7 @@ namespace Mailform.Models
 			{
 				if (String.IsNullOrEmpty(value))
 				{
-					throw new Exception();
+					throw new Exception("メールの本文が空です");
 				}
 				this.body = value;
 			}
@@ -134,7 +141,7 @@ namespace Mailform.Models
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new Exception();
+                    throw new Exception("メールサーバのアドレスが空です");
                 }
                 this.server = value;
             }
@@ -150,7 +157,7 @@ namespace Mailform.Models
             {
                 if(value < 0 || 65535 < value)
                 {
-                    throw new Exception();
+                    throw new Exception("メールサーバのポート指定が不正です");
                 }
                 this.port = value;
             }

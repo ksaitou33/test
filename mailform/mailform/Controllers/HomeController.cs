@@ -18,42 +18,36 @@ namespace Mailform.Controllers
             ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
             ViewData["Runtime"] = isMono ? "Mono" : ".NET";
 
-            return View();
+            Session["User"] = null;
+            var userEdit = new UserEdit();
+
+            return View(userEdit);
         }
 
         [HttpPost]
-        public ActionResult Index(Mail mail)
+        public ActionResult Index(UserEdit userEdit)
         {
-            //Test();
+            //確認コードの生成
+            var user = new User();
+            user.MailAddress = userEdit.MailAddress;
 
+            //メール送信
             var mail = new Mail();
-
-            return View(mail);
-        }
-
-        public void Test()
-        {
-            var from = @"k_saitou33@hotmail.com";
-            var to = @"keigo@mdr.to";
-            var subject = @"test";
-            var body = "test¥ntest";
-
             try
             {
-				var mail = new Mail()
-				{
-					From = from,
-					To = to,
-					Subject = subject,
-					Body = body
-				};
-				mail.Send();
+                mail.From = "keigo@mdr.to";
+                mail.To = user.MailAddress;
+                mail.Subject = "test";
+                mail.Body = "確認コード : " + user.AuthenticationCode;
             }
             catch(Exception e)
             {
-                throw e;
+                ViewBag.Exception = e;
+                return View(userEdit);
             }
 
+            Session["User"] = user;
+            return Redirect("/AuthCode/");
         }
     }
 }

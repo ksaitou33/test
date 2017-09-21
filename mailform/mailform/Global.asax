@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="mailform.Global" %>
+﻿<%@ Application Inherits="Mailform.Global" %>

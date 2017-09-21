@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace mailform
+namespace Mailform
 {
     public class RouteConfig
     {
