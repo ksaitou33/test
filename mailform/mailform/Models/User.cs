@@ -15,9 +15,12 @@ namespace Mailform.Models
 
 			var r = new Random();
 			AuthenticationCode = String.Format("{0:D6}", r.Next(100000));
+
+            IsAdmin = false;
         }
 
         public string MailAddress { get; set; }
         public string AuthenticationCode { get; }
+        public bool IsAdmin { get; set; }
     }
 }

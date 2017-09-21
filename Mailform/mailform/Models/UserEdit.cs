@@ -8,6 +8,7 @@ namespace Mailform.Models
         {
 			MailAddress = "";
 			AuthenticationCode = "";
+            AdminPassword = "";
         }
         public UserEdit(User user) : this()
         {
@@ -16,5 +17,6 @@ namespace Mailform.Models
 
 		public string MailAddress { get; set; }
         public string AuthenticationCode { get; set; }
+        public string AdminPassword { get; set; }
     }
 }
