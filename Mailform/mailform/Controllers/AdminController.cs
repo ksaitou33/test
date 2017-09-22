@@ -34,6 +34,7 @@ namespace Mailform.Controllers
                 return Redirect("/Admin/Menu/");
             }
 
+            ViewBag.Exception = new Exception("確認コードが一致しません");
             return View(userEdit);
         }
 

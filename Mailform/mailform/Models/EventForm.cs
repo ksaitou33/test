@@ -1,27 +1,26 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+
 
 namespace Mailform.Models
 {
     public class EventForm
     {
-        [BsonId]
-        public ObjectId BsonId { get; set; }
-
-        [BsonIgnore]
-        public string Id
+        public EventForm()
         {
-            get { return BsonId.ToString(); }
+            Title = "";
+            Items = new Dictionary<string, string>();
+        }
+
+        public EventForm(EventTemplate template) : this()
+        {
+            Title = template.Title;
+            Items = template.Items.ToDictionary(i => "");
         }
 
         public string Title { get; set; }
 
-        public string FCNumber { get; set; }
-
-        public string TelNumber { get; set; }
-
-        public List<string> Others{ get; set; }
+        public Dictionary<string, string> Items{ get; set; }
     }
 }

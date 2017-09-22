@@ -39,6 +39,7 @@ namespace Mailform.Controllers
                 mail.To = user.MailAddress;
                 mail.Subject = "test";
                 mail.Body = "確認コード : " + user.AuthenticationCode;
+                //mail.Send();
             }
             catch(Exception e)
             {

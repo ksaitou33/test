@@ -107,6 +107,7 @@
     <Compile Include="Models\EventForm.cs" />
     <Compile Include="Models\DBConnection.cs" />
     <Compile Include="Models\EventList.cs" />
+    <Compile Include="Models\EventTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
